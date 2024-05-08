@@ -1,6 +1,6 @@
-# music-store
+# Music/Instruments Store 
 
-This template should help get you started developing with Vue 3 in Vite.
+An Ecommerce Website/Web App created with Vue.js 3
 
 ## Recommended IDE Setup
 
