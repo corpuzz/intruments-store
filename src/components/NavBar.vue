@@ -14,7 +14,7 @@
                     <!-- <div id="cart-counter"></div> -->
                 <!-- </div> -->
                 <li><router-link to="/profile">Profile</router-link></li>
-                <li><router-link to="/profile">Login/Logout</router-link></li>
+                <li><router-link to="/login">Login/Logout</router-link></li>
             </div>
         </ul>
     </nav>

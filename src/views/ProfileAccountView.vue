@@ -40,7 +40,7 @@
                                 <p class="pp">{{ item.name }}</p>
                                 <p class="pp">{{ item.description }}</p>
                             </div>
-                            <button class="btn" @click="viewDescription(product)">View</button>
+                            <button class="btn" @click="viewDescription(item)">View</button>
                         </div>
                     </div>
                 </div>
@@ -52,12 +52,14 @@
 
 <script setup>
 
+import { useRouter } from 'vue-router';
 import { computed } from 'vue';
 import { useCartStore } from '@/stores/cartStore';
 import { useProductStore } from '@/stores/productStore';
 
+const router = useRouter();
 const cartStore = useCartStore();
-const cartItems = computed( () => cartStore.cart)
+const cartItems = computed( () => cartStore.orders)
 const productStore = useProductStore();
 const user = {
     name: "Jose P. Rizal",
@@ -69,6 +71,12 @@ const user = {
     ],
     orders: [],
     imageUrl: "src/views/image.png"
+}
+const viewDescription = (product) => {
+    productStore.setSelectedProduct(product)
+    // showDescription = true;
+    // router.push(`/productDescription/`);
+    router.push({name: 'productDescription'});
 }
 </script>
 
@@ -87,6 +95,8 @@ const user = {
     align-items: center;
     gap: 20px;
     padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(99, 99, 99, 0.57);
 }
 
 .profile-picture {
@@ -111,8 +121,9 @@ const user = {
     background-color: #fff;
     flex: 1 0 calc(33% - 20px);
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    /* border: 1px solid #ddd; */
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(99, 99, 99, 0.57);
 }
 
 .profile-section h3 {

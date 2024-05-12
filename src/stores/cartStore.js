@@ -5,6 +5,7 @@ export const useCartStore = defineStore('cartStore', {
     state: () => ({
         cart: [],
         checkout: [],
+        orders: [],
         isEmpty: true,
     }),
     actions: {
@@ -36,6 +37,9 @@ export const useCartStore = defineStore('cartStore', {
             this.cart = [];
             this.isEmpty = true;
             this.$state.cart = [...this.cart];
+        },
+        removeFromCheckout(itemName) {
+            this.checkout = this.checkout.filter((item) => item.name !== itemName);
         }
     },
     getters: {

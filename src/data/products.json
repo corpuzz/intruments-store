@@ -6,7 +6,8 @@
             "description": "Rogue RA-090 Dreadnought Acoustic Guitar",
             "price": 6823.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Guitar.jpg"
+            "image": "src/data/img/strings/Guitar.jpg",
+            "isChecked": false
         },
         {
             "id": 2,
@@ -14,7 +15,8 @@
             "description": "Rogue LX200BL Left-Handed Series III Electric Bass Guitar",
             "price": 11132.00,
             "category": "acoustic/electric",
-            "image": "src/data/img/strings/bass.jpg"
+            "image": "src/data/img/strings/bass.jpg",
+            "isChecked": false
         },
         {
             "id": 3,
@@ -22,7 +24,8 @@
             "description": "Cremona SV-500 Series Violin Outfit",
             "price": 20592.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Violin.jpg"
+            "image": "src/data/img/strings/Violin.jpg",
+            "isChecked": false
         },
         {
             "id": 4,
@@ -30,7 +33,8 @@
             "description": "Rees Harps Harpsicle Harp",
             "price": 32469.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Harp.jpg"
+            "image": "src/data/img/strings/Harp.jpg",
+            "isChecked": false
         },
         {
             "id": 5,
@@ -38,7 +42,8 @@
             "description": "Bellafina Musicale Series Cello Outfit",
             "price": 55661.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Cello.jpg"
+            "image": "src/data/img/strings/Cello.jpg",
+            "isChecked": false
         },
         {
             "id": 6,
@@ -46,7 +51,8 @@
             "description": "Knilling 1200 Sebastian Model Double Bass Outfit",
             "price": 197847.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Double Bass.jpg"
+            "image": "src/data/img/strings/Double Bass.jpg",
+            "isChecked": false
         },
         {
             "id": 7,
@@ -54,7 +60,8 @@
             "description": "Bellafina Musicale Series Viola Outfit",
             "price": 20409.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Viola.jpg"
+            "image": "src/data/img/strings/Viola.jpg",
+            "isChecked": false
         },
         {
             "id": 8,
@@ -62,7 +69,8 @@
             "description": "Deering Artisan Goodtime II 5-String Resonator Banjo",
             "price": 72917.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Banjo.jpg"
+            "image": "src/data/img/strings/Banjo.jpg",
+            "isChecked": false
         },
         {
             "id": 9,
@@ -70,7 +78,8 @@
             "description": "Rogue VB-100 Fiddle Guitar",
             "price": 14224.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Fiddle.jpg"
+            "image": "src/data/img/strings/Fiddle.jpg",
+            "isChecked": false
         },
         {
             "id": 10,
@@ -78,7 +87,8 @@
             "description": "Roosebeck Lute",
             "price": 28531.00,
             "category": "acoustic",
-            "image": "src/data/img/strings/Lute.jpg"
+            "image": "src/data/img/strings/Lute.jpg",
+            "isChecked": false
         },
 
 
@@ -89,7 +99,8 @@
             "description": "Bosphorus Cymbals Antique Crisp Top Cymbal",
             "price": 10273.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Cymbals.jpg"
+            "image": "src/data/img/percussion/Cymbals.jpg",
+            "isChecked": false
         },
         {
             "id": 2,
@@ -97,7 +108,8 @@
             "description": "Sound Percussion Labs Birch Marching Bass Drum with Carrier - White 20 x 14 in.",
             "price": 17316.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Bass Drum.jpg"
+            "image": "src/data/img/percussion/Bass Drum.jpg",
+            "isChecked": false
         },
         {
             "id": 3,
@@ -105,7 +117,8 @@
             "description": "Sound Percussion Labs 468 Series Snare Drum",
             "price": 8658.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Snare Drum.jpg"
+            "image": "src/data/img/percussion/Snare Drum.jpg",
+            "isChecked": false
         },
         {
             "id": 4,
@@ -113,7 +126,8 @@
             "description": "Sonor Orff SMART Series Alto Primary Xylophone",
             "price": 42674.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Xylophone.jpg"
+            "image": "src/data/img/percussion/Xylophone.jpg",
+            "isChecked": false
         },
         {
             "id": 5,
@@ -121,7 +135,8 @@
             "description": "Black Swamp Percussion Pro Concert Castanet Machine",
             "price": 10453.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Castanets.jpg"
+            "image": "src/data/img/percussion/Castanets.jpg",
+            "isChecked": false
         },
         {
             "id": 6,
@@ -129,7 +144,8 @@
             "description": "CP CP380 Tambourine Double Row",
             "price": 2164.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Tambourine.jpg"
+            "image": "src/data/img/percussion/Tambourine.jpg",
+            "isChecked": false
         },
         {
             "id": 7,
@@ -137,7 +153,8 @@
             "description": "Stagg Wood Maracas",
             "price": 939.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Maracas.jpg"
+            "image": "src/data/img/percussion/Maracas.jpg",
+            "isChecked": false
         },
         {
             "id": 8,
@@ -145,7 +162,8 @@
             "description": "Majestic 4.3-Octave Deluxe Series Marimba with Padauk Bars",
             "price": 188971.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Marimba.jpg"
+            "image": "src/data/img/percussion/Marimba.jpg",
+            "isChecked": false
         },
         {
             "id": 9,
@@ -153,7 +171,8 @@
             "description": "Nino Designer Series Double Nino Conga",
             "price": 16079.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Conga.jpg"
+            "image": "src/data/img/percussion/Conga.jpg",
+            "isChecked": false
         },
         {
             "id": 10,
@@ -161,7 +180,8 @@
             "description": "X8 Drums Malibu Master Series Djembe",
             "price": 24378.00,
             "category": "percussion",
-            "image": "src/data/img/percussion/Djembe.jpg"
+            "image": "src/data/img/percussion/Djembe.jpg",
+            "isChecked": false
         },
 
 
@@ -172,7 +192,8 @@
             "description": "Laney LX35R-Red 35 Watt Guitar Combo Amplifier (Red)",
             "price": 13600.00,
             "category": "electronic",
-            "image": "src/data/img/electronic/Amplifier.jpg"
+            "image": "src/data/img/electronic/Amplifier.jpg",
+            "isChecked": false
         },
         {
             "id": 2,
@@ -180,7 +201,8 @@
             "description": "Zoom G2X Four Guitar Multi-effects Processor",
             "price": 13905.00,
             "category": "electronic",
-            "image": "src/data/img/electronic/Guitar Pedal.jpg"
+            "image": "src/data/img/electronic/Guitar Pedal.jpg",
+            "isChecked": false
         },
         {
             "id": 3,
@@ -188,7 +210,8 @@
             "description": "Audio Technica AT2020USB-XP Cardiod Condenser USB Microphone",
             "price": 12400.00,
             "category": "electronic",
-            "image": "src/data/img/electronic/Microphone.jpg"
+            "image": "src/data/img/electronic/Microphone.jpg",
+            "isChecked": false
         },
         {
             "id": 4,
@@ -196,7 +219,8 @@
             "description": "Audio Technica ATH-E50 Professional In-Ear Monitor Headphones",
             "price": 10500.00,
             "category": "electronic",
-            "image": "src/data/img/electronic/Headphone.jpg"
+            "image": "src/data/img/electronic/Headphone.jpg",
+            "isChecked": false
         },
         {
             "id": 5,
@@ -204,7 +228,8 @@
             "description": "SKB 1SKB-R100-SQ5 Roto Rack For SQ5 Mixer",
             "price": 27700.00,
             "category": "electronic",
-            "image": "src/data/img/electronic/Mixer.jpg"
+            "image": "src/data/img/electronic/Mixer.jpg",
+            "isChecked": false
         },
         {
             "id": 6,
@@ -212,7 +237,8 @@
             "description": "Laney AHP115 AudioHUB 15-inch 1400 Watts Active Speaker",
             "price": 26145.00,
             "category": "electronic",
-            "image": "src/data/img/electronic/Speaker.jpg"
+            "image": "src/data/img/electronic/Speaker.jpg",
+            "isChecked": false
         },
         
 
@@ -222,7 +248,8 @@
             "description": "D'Addario EJ16-12P Phosphor Bronze Light Acoustic Guitar Strings 12-Pack",
             "price": 4947.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Strings.jpg"
+            "image": "src/data/img/accessories/Strings.jpg",
+            "isChecked": false
         },
         {
             "id": 2,
@@ -230,7 +257,8 @@
             "description": "1 Box Case 30-50 premium Guitar Picks - 50 PCS Mixed",
             "price": 8477.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Guitar Picks.jpg"
+            "image": "src/data/img/accessories/Guitar Picks.jpg",
+            "isChecked": false
         },
         {
             "id": 3,
@@ -238,7 +266,8 @@
             "description": "D'Addario NS Reflex Capo",
             "price": 1236.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Capo.jpg"
+            "image": "src/data/img/accessories/Capo.jpg",
+            "isChecked": false
         },
         {
             "id": 4,
@@ -246,7 +275,8 @@
             "description": "D'Addario NS Micro Universal Clip-On Tuner",
             "price": 1360.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Tuner.jpg"
+            "image": "src/data/img/accessories/Tuner.jpg",
+            "isChecked": false
         },
         {
             "id": 5,
@@ -254,7 +284,8 @@
             "description": "DrumDial Drum Tuner",
             "price": 250.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Drum Tuner.jpg"
+            "image": "src/data/img/accessories/Drum Tuner.jpg",
+            "isChecked": false
         },
         {
             "id": 6,
@@ -262,7 +293,8 @@
             "description": "D'Addario ABS Bridge/End Pin Set",
             "price": 327.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Bridge Pins.jpg"
+            "image": "src/data/img/accessories/Bridge Pins.jpg",
+            "isChecked": false
         },
         {
             "id": 7,
@@ -270,7 +302,8 @@
             "description": "Proline Acoustic Bone Nut Blank",
             "price": 525.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Guitar Nuta.jpg"
+            "image": "src/data/img/accessories/Guitar Nuta.jpg",
+            "isChecked": false
         },
         {
             "id": 8,
@@ -278,7 +311,8 @@
             "description": "Perri's 2 Basic Leather Guitar Strap",
             "price": 628.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Guitar Strap.jpg"
+            "image": "src/data/img/accessories/Guitar Strap.jpg",
+            "isChecked": false
         },
         {
             "id": 9,
@@ -286,7 +320,8 @@
             "description": "GLEAM Guitar Stand - Adjustable for Electric, Acoustic Guitars and Bass, Guitar Accessories",
             "price": 19880.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Guitar Stand.jpg"
+            "image": "src/data/img/accessories/Guitar Stand.jpg",
+            "isChecked": false
         },
         {
             "id": 10,
@@ -294,7 +329,8 @@
             "description": "CAHAYA Guitar Bag Acoustic Reinforced 0.7 Inch Thick Sponge Soft Padded Guitar Bag",
             "price": 5078.00,
             "category": "accessories",
-            "image": "src/data/img/accessories/Guitar Bag.jpg"
+            "image": "src/data/img/accessories/Guitar Bag.jpg",
+            "isChecked": false
         }
     ]
 

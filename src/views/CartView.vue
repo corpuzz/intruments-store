@@ -5,7 +5,7 @@
         <h2>Your Shopping Cart</h2>
         <div v-if="cartStore.isEmpty">
             <p class="page-message">Your cart is empty.</p>
-        </div>
+        </div> 
 
         <div v-else>
             <div v-for="item in cartItems" :key="item.id" class="cart-item">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="cii-right">
-                        <input type="checkbox" id="selected-product" name="selected-product" @change="addToCheckout(item)">
+                        <input type="checkbox" id="selected-product" name="selected-product" v-model="item.isChecked" @change="addToCheckout(item)">
                         <div>
                             <button @click="removeFromCart(item.id)" class="remove-button">Remove</button>
                             <p class="item-total">Total: {{ productStore.convertToPhp(item.price * item.quantity) }}</p>
@@ -34,7 +34,7 @@
                 <p class="total-items">Total Items: {{ totalItems }}</p>
                 <p class="total-price">Total Amount: {{ productStore.convertToPhp(totalPrice) }}</p>
                 <div>
-                    <button @click="router.push({name: 'checkout'})" class="cart-button checkout">Checkout</button>
+                    <button @click="handleCart" class="cart-button checkout">Checkout</button>
                     <button @click="clearCart" class="cart-button clear">Clear All</button>
                 </div>
             </div>
@@ -42,25 +42,70 @@
     </div>
 
     </div>
+    <!-- Modal  -->
+    <div v-show="showOrderPlacedModal">
+    <div class="modal-backdrop"></div>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Nothing selected</h3>
+        <button @click="closeOrderPlacedModal" class="modal-close-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 9.29L7.71 17 6 15.29 10.71 10 6 4.71 7.71 3 12 7.29z" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please select at least one item to proceed</p>
+        <button @click="closeOrderPlacedModal" class="modal-button">Confirm</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+// import { useRouter } from 'vue-router';
+import { ref, computed } from 'vue';
 import { useCartStore } from '@/stores/cartStore';
 import { useProductStore } from '@/stores/productStore';
 import NavBar from '@/components/NavBar.vue';
 import router from '@/router';
 
+// const router = useRouter();
 const productStore = useProductStore();
 const cartStore = useCartStore()
 const cartItems = computed( () => cartStore.cart)
+const checkout = ref( cartStore.checkout )
 // const { cart , isEmpty } = cartStore.cartState;
+const showOrderPlacedModal = ref(false);
 // const cartItems = computed( () => cart );
+
 const addToCheckout = (item) => {
-    cartStore.addToCheckout(item);
+    if(item.isChecked) {
+        cartStore.addToCheckout(item);
+    } else {
+        cartStore.removeFromCheckout(item.name);
+    }
 }
 
 
+function closeOrderPlacedModal() {
+  showOrderPlacedModal.value = false;
+}
+
+// const handleCheckout = () => {
+//     for(let order in cartStore.checkout) {
+//         orders.push(order);
+//     }
+
+//     router.push({ name: 'checkout'});
+// }
+function handleCart () {
+    if(checkout.value.length > 0) {
+        router.push({ name: 'checkout'});
+    } else {
+        showOrderPlacedModal.value = true;
+    }
+}
 const totalItems = computed(() =>
     cartItems.value.reduce((acc, item) => acc + item.quantity, 0)
 );
@@ -242,5 +287,56 @@ h2 {
 #selected-product {
     transform: scale(2);
     align-self: end;
+}
+
+/* Modal style */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10; /* Adjust as needed */
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 11; /* Adjust as needed */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-close-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
 }
 </style>
