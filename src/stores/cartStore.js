@@ -4,6 +4,7 @@ import { reactive, toRefs } from 'vue';
 export const useCartStore = defineStore('cartStore', {
     state: () => ({
         cart: [],
+        checkout: [],
         isEmpty: true,
     }),
     actions: {
@@ -21,6 +22,10 @@ export const useCartStore = defineStore('cartStore', {
                 product.quantity = 1  // Initialize quantity to 1 for new product
             }
             this.$state.cart = [...this.cart];
+        },
+        addToCheckout(product) {
+            this.checkout.push(product);
+            this.$state.checkout = [...this.checkout];
         },
         removeFromCart(itemId) {
             this.cart = this.cart.filter((item) => item.id !== itemId);

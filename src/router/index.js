@@ -1,29 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CardParent from '@/components/CardParent.vue'
-import ProfileView from '@/views/ProfileView.vue'
+// import CardParent from '@/components/CardParent.vue'
 import CartView from '@/views/CartView.vue'
 import LoginForm from '@/components/LoginForm.vue'
-import SignUpForm from '@/components/SignUpForm.vue'
 import ProductDescriptionView from '@/views/ProductDescriptionView.vue'
 import ProfileAccountView from '@/views/ProfileAccountView.vue'
+import HomeView from '@/views/HomeView.vue'
+import SignUpView from '@/views/SignUpView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import CheckoutPayment from '@/views/CheckoutPayment.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      name: 'sign-up',
+      component: SignUpView
+    },
+    {
+      path: '/home',
       name: 'home',
-      component: CardParent
+      component: HomeView
     },
     {
-      path: '/',
+      path: '/shop',
       name: 'shop',
-      component: CardParent
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: ProfileView
+      component: HomeView
     },
     {
       path: '/cart',
@@ -31,14 +33,14 @@ const router = createRouter({
       component: CartView
     },
     {
-      path: '/login',
-      name: 'login',
-      component: LoginForm
+      path: '/profile',
+      name: 'profile',
+      component: ProfileAccountView
     },
     {
-      path: '/sign-up',
-      name: 'sign-up',
-      component: SignUpForm
+      path: '/login',
+      name: 'login',
+      component: ProfileView
     },
     {
       path: '/productDescription',
@@ -49,6 +51,11 @@ const router = createRouter({
       path: '/profile-details',
       name: 'profile-details',
       component: ProfileAccountView
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: CheckoutPayment
     },
     // {
     //   path: '/about',

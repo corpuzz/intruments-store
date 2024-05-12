@@ -15,7 +15,7 @@
         <label for="confirmPassword">Confirm Password:</label>
         <input type="password" id="confirmPassword" >
       </div>
-      <button @click="router.push({ name: 'profile-details'})" type="submit" class="signup-button">Sign Up</button>
+      <button @click="router.push({ name: 'home'})" type="submit" class="signup-button">Sign Up</button>
     </form>
   </div>
 </template>

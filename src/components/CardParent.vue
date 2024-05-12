@@ -1,6 +1,7 @@
 <template>
+    <div>
     <div v-if="!productStore.searchTerm" class="product-list">
-        <div v-for="product in productStore.products" :key="product.id" class="product-card">
+        <div v-for="product in productStore.products" :key="product.id" class="product-card" >
             <div class="image-container">
                 <img :src="product.image" alt="Product Image" class="product-image">
 
@@ -31,6 +32,7 @@
         </div>
     </div>
 
+    </div>
 </template>
 
 <script setup>

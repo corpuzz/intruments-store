@@ -1,26 +1,29 @@
 <template>
     <nav class="nav-bar">
         <ul>
-            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="/home">Home</router-link></li>
             <div>
                 <div class="search-div">
                     <li class="search-li"><input type="search" id="search-box" v-model="productStore.searchTerm" @input="detectInput" placeholder="Search Products"></li>
                     <li class="search-btn-li"><button @click="productStore.filterProducts" id="search-btn">Search</button></li>
                 </div>
-                <li><router-link to="/">Shop</router-link></li>
-                <li><router-link to="/cart">Cart</router-link></li>
+                <li><router-link to="/home">Shop</router-link></li>
+                <!-- <div class="cart-counter-div"> -->
+
+                    <li><router-link to="/cart">Cart</router-link></li>
+                    <!-- <div id="cart-counter"></div> -->
+                <!-- </div> -->
                 <li><router-link to="/profile">Profile</router-link></li>
+                <li><router-link to="/profile">Login/Logout</router-link></li>
             </div>
         </ul>
     </nav>
 
-    <RouterView />
+    <!-- <RouterView /> -->
 </template>
 
 <script setup>
-import { RouterView, RouterLink } from 'vue-router'
-// import { ref } from 'vue';
-
+import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
 import { useProductStore } from '@/stores/productStore';
 
@@ -105,6 +108,21 @@ a:hover {
 #search-btn:hover {
     background-color: #00e5ff;
     cursor: pointer;
+}
+.cart-counter-div {
+    display: inline-block;
+}
+
+#cart-counter {
+    display: inline-block;
+    position: relative;
+    bottom: 9px;
+    right: 25px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid red;
+    background-color: red;
+    border-radius: 1000px;
 }
 
 </style>

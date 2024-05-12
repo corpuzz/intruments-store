@@ -1,55 +1,78 @@
 <template>
-    <div>
-    <NavBar />
     <div class="cart-container">
-        <h2>Your Shopping Cart</h2>
+        <h2>Checkout</h2>
         <div v-if="cartStore.isEmpty">
-            <p class="page-message">Your cart is empty.</p>
+            <p class="page-message">Nothing to checkout</p>
         </div>
 
         <div v-else>
-            <div v-for="item in cartItems" :key="item.id" class="cart-item">
-                <div class="cart-item-details">
-                    <img :src="item.image" alt="Product Image" class="cart-item-image">
-                    <div class="cart-item-info">
-                        <h3>{{ item.name }}</h3>
-                        <p>{{ item.description }}</p>
-                        <p class="item-price">Price: {{ productStore.convertToPhp(item.price) }}</p>
-                        <div class="quantity-controls">
-                            <button @click="decrementQuantity(item)" class="quantity-button">-</button>
-                            <span class="item-quantity">{{ item.quantity }}</span>
-                            <button @click="incrementQuantity(item)" class="quantity-button">+</button>
+            <div class="shipping-address">
+                <p class="address-label">Shipping Address</p>
+                <p class="address">La, Trinidad</p>
+            </div>
+
+            <div class="shipping-address">
+                <h3>Orders</h3>
+                <div v-for="item in cartItems" :key="item.id" class="cart-item">
+                    <div class="cart-item-details">
+                        <img :src="item.image" alt="Product Image" class="cart-item-image">
+                        <div class="cart-item-info">
+                            <h3>{{ item.name }}</h3>
+                            <p>{{ item.description }}</p>
+                            <p class="item-price">Price: {{ productStore.convertToPhp(item.price) }}</p>
+                        </div>
+                        <div class="cii-right">
+                            <div>
+                                <p class="item-price">Quantity:</p>
+                                <div class="quantity-controls">
+                                    <button @click="decrementQuantity(item)" class="quantity-button">-</button>
+                                    <span class="item-quantity">{{ item.quantity }}</span>
+                                    <button @click="incrementQuantity(item)" class="quantity-button">+</button>
+                                </div>
+
+                            </div>
+                            <!-- <input type="checkbox" id="selected-product" name="selected-product" @change="addToCheckout(item)"> -->
+                            <div>
+                                <!-- <button @click="removeFromCart(item.id)" class="remove-button">Remove</button> -->
+                                <p class="item-total">Total: {{ productStore.convertToPhp(item.price * item.quantity) }}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="cii-right">
-                        <input type="checkbox" id="selected-product" name="selected-product" @change="addToCheckout(item)">
-                        <div>
-                            <button @click="removeFromCart(item.id)" class="remove-button">Remove</button>
-                            <p class="item-total">Total: {{ productStore.convertToPhp(item.price * item.quantity) }}</p>
-                        </div>
-                    </div>
+                </div>
+
+            </div>
+            <div class="shipping-address">
+                <p class="address-label">Payment method</p>
+                <div class="payment-div">
+                    <p class="payment-method-p">Cash on delivery</p>
+                    <input class="payment-checkbox" type="checkbox" id="selected-product" name="selected-product" @change="addToCheckout(item)">
+                </div>
+                <div class="payment-div">
+                    <p class="payment-method-p">GCash</p>
+                    <input class="payment-checkbox" type="checkbox" id="selected-product" name="selected-product" @change="addToCheckout(item)">
+                </div>
+                <div class="payment-div">
+                    <p class="payment-method-p">Debit/Credit card</p>
+                    <input class="payment-checkbox" type="checkbox" id="selected-product" name="selected-product" @change="addToCheckout(item)">
                 </div>
             </div>
             <div class="cart-summary">
                 <p class="total-items">Total Items: {{ totalItems }}</p>
                 <p class="total-price">Total Amount: {{ productStore.convertToPhp(totalPrice) }}</p>
                 <div>
-                    <button @click="router.push({name: 'checkout'})" class="cart-button checkout">Checkout</button>
-                    <button @click="clearCart" class="cart-button clear">Clear All</button>
+                    <button @click="clearCart" class="cart-button checkout">Place order</button>
                 </div>
             </div>
         </div>
     </div>
 
-    </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
 import { useCartStore } from '@/stores/cartStore';
 import { useProductStore } from '@/stores/productStore';
-import NavBar from '@/components/NavBar.vue';
-import router from '@/router';
 
 const productStore = useProductStore();
 const cartStore = useCartStore()
@@ -100,7 +123,24 @@ const clearCart = () => {
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.shipping-address {
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px 0px #636363c8;
+    margin-bottom: 1rem;
+}
+
+.payment-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-checkbox {
+    margin-right: 1rem;
 }
 
 .page-message {
@@ -210,6 +250,8 @@ h2 {
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
+    box-shadow: 0px 0px 8px 0px #65656586;
+    padding: 0px 1rem;
 }
 
 .total-items,
@@ -241,6 +283,9 @@ h2 {
 
 #selected-product {
     transform: scale(2);
-    align-self: end;
+    /* align-self: end center; */
 }
+
+
+
 </style>

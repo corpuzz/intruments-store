@@ -1,4 +1,5 @@
 <template>
+    <NavBar />
     <div class="view-description">
         <h2>Product Details</h2>
         <div v-if="product" class="description-content">
@@ -25,6 +26,7 @@
 import { ref } from 'vue';
 import { useProductStore } from '@/stores/productStore'
 import { useCartStore } from '@/stores/cartStore';
+import NavBar from '@/components/NavBar.vue';
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
