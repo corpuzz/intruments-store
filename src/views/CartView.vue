@@ -1,65 +1,63 @@
 <template>
     <div>
-    <NavBar />
-    <div class="cart-container">
-        <h2>Your Shopping Cart</h2>
-        <div v-if="cartStore.isEmpty">
-            <p class="page-message">Your cart is empty.</p>
-        </div> 
+        <NavBar />
+        <div class="cart-container">
+            <h2>Your Shopping Cart</h2>
+            <div v-if="cartStore.isEmpty">
+                <p class="page-message">Your cart is empty.</p>
+            </div>
 
-        <div v-else>
-            <div v-for="item in cartItems" :key="item.id" class="cart-item">
-                <div class="cart-item-details">
-                    <img :src="item.image" alt="Product Image" class="cart-item-image">
-                    <div class="cart-item-info">
-                        <h3>{{ item.name }}</h3>
-                        <p>{{ item.description }}</p>
-                        <p class="item-price">Price: {{ productStore.convertToPhp(item.price) }}</p>
-                        <div class="quantity-controls">
-                            <button @click="decrementQuantity(item)" class="quantity-button">-</button>
-                            <span class="item-quantity">{{ item.quantity }}</span>
-                            <button @click="incrementQuantity(item)" class="quantity-button">+</button>
+            <div v-else>
+                <div v-for="item in cartItems" :key="item.id" class="cart-item">
+                    <div class="cart-item-details">
+                        <img :src="item.image" alt="Product Image" class="cart-item-image">
+                        <div class="cart-item-info">
+                            <h3>{{ item.name }}</h3>
+                            <p class="pdescription">{{ item.description }}</p>
+                            <p class="item-price">Price: {{ productStore.convertToPhp(item.price) }}</p>
+                            <div class="quantity-controls">
+                                <button @click="decrementQuantity(item)" class="quantity-button">-</button>
+                                <span class="item-quantity">{{ item.quantity }}</span>
+                                <button @click="incrementQuantity(item)" class="quantity-button">+</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="cii-right">
-                        <input type="checkbox" id="selected-product" name="selected-product" v-model="item.isChecked" @change="addToCheckout(item)">
-                        <div>
-                            <button @click="removeFromCart(item.id)" class="remove-button">Remove</button>
-                            <p class="item-total">Total: {{ productStore.convertToPhp(item.price * item.quantity) }}</p>
+                        <div class="cii-right">
+                            <input type="checkbox" id="selected-product" name="selected-product"
+                                v-model="item.isChecked" @change="addToCheckout(item)">
+                            <div>
+                                <button @click="removeFromCart(item.id)" class="remove-button">Remove</button>
+                                <p class="item-total">Total: {{ productStore.convertToPhp(item.price * item.quantity) }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="cart-summary">
-                <p class="total-items">Total Items: {{ totalItems }}</p>
-                <p class="total-price">Total Amount: {{ productStore.convertToPhp(totalPrice) }}</p>
-                <div>
-                    <button @click="handleCart" class="cart-button checkout">Checkout</button>
-                    <button @click="clearCart" class="cart-button clear">Clear All</button>
+                <div class="cart-summary">
+                    <p class="total-items">Total Items: {{ totalItems }}</p>
+                    <p class="total-price">Total Amount: {{ productStore.convertToPhp(totalPrice) }}</p>
+                    <div>
+                        <button @click="handleCart" class="cart-button checkout">Checkout</button>
+                        <button @click="clearCart" class="cart-button clear">Clear All</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </div>
     <!-- Modal  -->
     <div v-show="showOrderPlacedModal">
-    <div class="modal-backdrop"></div>
-    <div class="modal">
-      <div class="modal-header">
-        <h3>Nothing selected</h3>
-        <button @click="closeOrderPlacedModal" class="modal-close-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 9.29L7.71 17 6 15.29 10.71 10 6 4.71 7.71 3 12 7.29z" />
-          </svg>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Please select at least one item to proceed</p>
-        <button @click="closeOrderPlacedModal" class="modal-button">Confirm</button>
-      </div>
+        <div class="modal-backdrop"></div>
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Nothing selected</h3>
+                <button @click="closeOrderPlacedModal" class="modal-close-button"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please select at least one item to proceed</p>
+                <button @click="closeOrderPlacedModal" class="modal-button">Confirm</button>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -73,14 +71,14 @@ import router from '@/router';
 // const router = useRouter();
 const productStore = useProductStore();
 const cartStore = useCartStore()
-const cartItems = computed( () => cartStore.cart)
-const checkout = ref( cartStore.checkout )
+const cartItems = computed(() => cartStore.cart)
+const checkout = ref(cartStore.checkout)
 // const { cart , isEmpty } = cartStore.cartState;
 const showOrderPlacedModal = ref(false);
 // const cartItems = computed( () => cart );
 
 const addToCheckout = (item) => {
-    if(item.isChecked) {
+    if (item.isChecked) {
         cartStore.addToCheckout(item);
     } else {
         cartStore.removeFromCheckout(item.name);
@@ -89,7 +87,7 @@ const addToCheckout = (item) => {
 
 
 function closeOrderPlacedModal() {
-  showOrderPlacedModal.value = false;
+    showOrderPlacedModal.value = false;
 }
 
 // const handleCheckout = () => {
@@ -99,9 +97,9 @@ function closeOrderPlacedModal() {
 
 //     router.push({ name: 'checkout'});
 // }
-function handleCart () {
-    if(checkout.value.length > 0) {
-        router.push({ name: 'checkout'});
+function handleCart() {
+    if (checkout.value.length > 0) {
+        router.push({ name: 'checkout' });
     } else {
         showOrderPlacedModal.value = true;
     }
@@ -130,7 +128,7 @@ const decrementQuantity = (item) => {
     if (item.quantity > 1) item.quantity--;
 };
 
-const clearCart = () => { 
+const clearCart = () => {
     cartStore.emptyCart();
     cartStore.isEmpty = true;
 };
@@ -160,7 +158,7 @@ h2 {
 
 .cart-item {
     /* width: 600px; */
-    height: 200px;
+    height: 160px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -188,6 +186,7 @@ h2 {
     object-fit: scale-down;
     overflow: hidden;
 }
+
 .cart-item-info {
     place-self: start;
 }
@@ -204,7 +203,7 @@ h2 {
     font-weight: 500;
     font-size: 1.1rem;
     color: #666;
-    /* margin: 0; */
+    margin: 10px auto;
 }
 
 .quantity-controls {
@@ -212,6 +211,9 @@ h2 {
     align-items: center;
 }
 
+.pdescription {
+    margin: 5px auto;
+}
 .quantity-button {
     padding: 5px 10px;
     font-size: 1rem;
@@ -230,6 +232,7 @@ h2 {
 .item-quantity {
     margin: 0 10px;
 }
+
 .remove-button {
     width: 100%;
 }
@@ -263,6 +266,10 @@ h2 {
     color: #333;
 }
 
+.item-total {
+    margin-bottom: 0;
+}
+
 .cart-button {
     padding: 10px 20px;
     font-size: 1rem;
@@ -272,6 +279,7 @@ h2 {
 .checkout {
     background-color: #007bff;
 }
+
 .checkout:hover {
     background-color: #0056b3;
 
@@ -291,52 +299,59 @@ h2 {
 
 /* Modal style */
 .modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10; /* Adjust as needed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    /* Adjust as needed */
 }
 
 .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 11; /* Adjust as needed */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 11;
+    /* Adjust as needed */
 }
 
 .modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .modal-close-button {
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    background: no-repeat url("@/assets/close.png"); 
+    background-size: 24px;
   border: none;
-  background: none;
+  /* background: none; */
   cursor: pointer;
   outline: none;
 }
 
 .modal-body {
-  text-align: center;
+    text-align: center;
 }
 
 .modal-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
 }
 </style>

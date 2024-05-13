@@ -5,17 +5,17 @@
     <form @submit.prevent="register" class="signup-form">
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" >
+        <input class="input" type="email" id="email" >
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" id="password" >
+        <input class="input" type="password" id="password" >
       </div>
       <div class="form-group">
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" >
+        <input class="input" type="password" id="confirmPassword" >
       </div>
-      <button @click="router.push({ name: 'home'})" type="submit" class="signup-button">Sign Up</button>
+      <button @click="router.push({ name: 'home'})" type="submit" class="signup-button">Register</button>
     </form>
   </div>
 </template>
@@ -66,9 +66,13 @@ h2 {
   color: #333;
 }
 
-
+.signup-form {
+    width: 100%;
+}
 
 .form-group {
+    display: flex;
+    flex-direction: column;
     width: 100%;
   margin-bottom: 20px;
 }
@@ -77,10 +81,9 @@ label {
   font-weight: bold;
 }
 
-input[type="email"],
-input[type="password"] {
-    display: block;
-  width: 100%;
+.input {
+/* display: block; */
+  width: 378px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;

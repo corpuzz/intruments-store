@@ -10,7 +10,7 @@
                     <p class="login-p or">or</p>
                     <p class="login-p">Create a new account</p>
                     <li>
-                        <RouterLink to="/sign-up"><button class="login-sign-up-btn btn">Sign Up</button></RouterLink>
+                        <RouterLink to="/signup"><button class="login-sign-up-btn btn">Sign Up</button></RouterLink>
                     </li>
 
                 </ul>

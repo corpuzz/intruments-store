@@ -9,6 +9,7 @@
         <div class="profile-sections">
             <div class="profile-section">
                 <h3>Account information</h3>
+                <hr style="width: 100%"/>
                 <ul>
                     <li>
                         <p>Shipping Address: <br>{{ user.address }}</p>
@@ -26,6 +27,7 @@
             </div>
             <div class="profile-section">
                 <h3>Order History</h3>
+                <hr style="width: 100%; margin-bottom: 1rem;"/>
                 <!-- <ul>
           <li v-for="order in user.orders" :key="order.id">
             <p>Order #{{ order.id }} - {{ order.name }}</p>
@@ -37,7 +39,7 @@
                         <img :src="item.image" alt="Product Image" class="cart-item-image">
                         <div class="cart-item-info">
                             <div class="pp-div">
-                                <p class="pp">{{ item.name }}</p>
+                                <p class="pp pname">{{ item.name }}</p>
                                 <p class="pp">{{ item.description }}</p>
                             </div>
                             <button class="btn" @click="viewDescription(item)">View</button>
@@ -241,9 +243,19 @@ const viewDescription = (product) => {
     /* font-weight: 700; */
 }
 
+.pname {
+    font-weight: bold;
+}
 .pp {
-    /* text-align: left; */
+    text-align: left;
     margin: 0 auto;
+    overflow: hidden;
+}
+
+.pp-div {
+    margin: auto 0;
+    overflow: hidden;
+    /* padding: 0 1rem; */
 }
 
 </style>

@@ -44,7 +44,7 @@
                 <h3 class="address-label">Payment method</h3>
                 <div class="payment-div">
                     <p class="payment-method-p">Cash on delivery</p>
-                    <input class="payment-checkbox" type="checkbox" id="selected-product" name="selected-product"> 
+                    <input class="payment-checkbox" type="checkbox" id="selected-product" name="selected-product">
                 </div>
                 <div class="payment-div">
                     <p class="payment-method-p">GCash</p>
@@ -66,23 +66,21 @@
     </div>
     <!-- Modal  -->
     <div v-if="showOrderPlacedModal">
-    <div class="modal-backdrop"></div>
-    <div class="modal">
-      <div class="modal-header">
-        <h3>Order Placed!</h3>
-        <button @click="closeOrderPlacedModal" class="modal-close-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 9.29L7.71 17 6 15.29 10.71 10 6 4.71 7.71 3 12 7.29z" />
-          </svg>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Your order has been successfully placed. Thank you for shopping.</p>
-        <button @click="resetCheckout" class="modal-button">Confirm</button>
-      </div>
+        <div class="modal-backdrop"></div>
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Order placed!</h3>
+                <button @click="closeOrderPlacedModal" class="modal-close-button">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Your order has been successfully placed.<br> Thank you for shopping.</p>
+                <button @click="resetCheckout" class="modal-button">Confirm</button>
+                <!-- <button @click="resetCheckout" class="modal-button">Continue Shopping</button> -->
+            </div>
+        </div>
     </div>
-  </div>
-    
+
 
 </template>
 
@@ -96,7 +94,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter();
 const productStore = useProductStore();
 const cartStore = useCartStore()
-const cartItems = computed( () => cartStore.checkout)
+const cartItems = computed(() => cartStore.checkout)
 // const { cart , isEmpty } = cartStore.cartState;
 // const cartItems = computed( () => cart );
 
@@ -105,25 +103,25 @@ const cartItems = computed( () => cartStore.checkout)
 const showOrderPlacedModal = ref(false);
 
 function closeOrderPlacedModal() {
-  showOrderPlacedModal.value = false;
+    showOrderPlacedModal.value = false;
     cartStore.checkout = [];
-    router.push({name: 'home'});
+    router.push({ name: 'home' });
 }
 
-function resetCheckout () {
+function resetCheckout() {
     cartStore.checkout = [];
-    router.push({name: 'home'});
+    router.push({ name: 'home' });
 }
 
 const handleCheckout = () => {
     showOrderPlacedModal.value = true;
-    for(let order of Object.values(cartStore.checkout)) {
+    for (let order of Object.values(cartStore.checkout)) {
         cartStore.orders.push(order);
     }
 
 
     // Reset checkbox state
-    for(let product of productStore.products) {
+    for (let product of productStore.products) {
         product.isChecked = false;
     }
 
@@ -223,6 +221,7 @@ h2 {
     object-fit: scale-down;
     overflow: hidden;
 }
+
 .cart-item-info {
     place-self: start;
 }
@@ -265,6 +264,7 @@ h2 {
 .item-quantity {
     margin: 0 10px;
 }
+
 .remove-button {
     width: 100%;
 }
@@ -307,10 +307,11 @@ h2 {
 }
 
 .checkout {
-    background-color: #007bff;
+    background-color: #e74152;
 }
+
 .checkout:hover {
-    background-color: #0056b3;
+    background-color: #ba2030;
 
 }
 
@@ -329,54 +330,62 @@ h2 {
 .quantity {
     margin-top: 0;
 }
+
 /* Modal style */
 .modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10; /* Adjust as needed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    /* Adjust as needed */
 }
 
 .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 11; /* Adjust as needed */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 11;
+    /* Adjust as needed */
 }
 
 .modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .modal-close-button {
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    background: no-repeat url("@/assets/close.png"); 
+    background-size: 24px;
   border: none;
-  background: none;
+  /* background: none; */
   cursor: pointer;
   outline: none;
 }
 
 .modal-body {
-  text-align: center;
+    text-align: center;
 }
 
 .modal-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
 }
 </style>

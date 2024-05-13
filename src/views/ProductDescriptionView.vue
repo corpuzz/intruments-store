@@ -2,6 +2,7 @@
     <NavBar />
     <div class="view-description">
         <h2>Product Details</h2>
+        <hr style="width: 100%"/>
         <div v-if="product" class="description-content">
             <div class="box one">
                 <img :src="product.image" alt="Product Image" class="description-image">
@@ -13,13 +14,28 @@
                 <p><strong>Description:</strong> {{ product.description }}</p>
                 <p><strong>Category:</strong> {{ product.category }}</p>
                 <p class="price"><strong>Price:</strong> {{ productStore.convertToPhp(product.price) }}</p>
-                <button @click="addToCart(product)">Add to Cart</button>
+                <button @click="handleAddToCart(product)">Add to Cart</button>
             </div>
         </div>
         <div v-else>
             <p>No product selected.</p>
         </div>
     </div>
+    <!-- Modal  -->
+    <div v-if="showOrderPlacedModal">
+    <div class="modal-backdrop"></div>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Success!</h3>
+        <button @click="closeOrderPlacedModal" class="modal-close-button">
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Item has been added to cart </p>
+        <button @click="router.push({name: 'cart'})" class="modal-button">View Cart</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -27,13 +43,24 @@ import { ref } from 'vue';
 import { useProductStore } from '@/stores/productStore'
 import { useCartStore } from '@/stores/cartStore';
 import NavBar from '@/components/NavBar.vue';
+import { useRouter } from 'vue-router'
 
+const router = useRouter();
 const productStore = useProductStore();
 const cartStore = useCartStore();
 const product = ref(productStore.selectedProduct);
 
 // const productPrice = productStore.formatToPeso(product.price);
+const showOrderPlacedModal = ref(false);
 
+function closeOrderPlacedModal() {
+  showOrderPlacedModal.value = false;
+}
+
+const handleAddToCart = (product) => {
+  showOrderPlacedModal.value = true;
+  addToCart(product);
+}
 
 const addToCart = (product) => {
     cartStore.addToCart(product);
@@ -60,19 +87,26 @@ const addToCart = (product) => {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 400px;
+    /* grid-template-rows: 400px; */
     gap: 1rem;
     padding: 2rem;
+    place-content: center;
 }
 
+.view-description h2 {
+    margin-top: 0;
+}
 .one {
     text-align: center;
     width: 100%;
     height: 100%;
 }
 
+
+
 .description-image {
-    height: 100%;
+    width: 150px;
+    /* height: 100%; */
     object-fit: scale-down;
     overflow: hidden;
 }
@@ -109,5 +143,63 @@ const addToCart = (product) => {
 
     font-weight: 500;
     font-size: 1.1rem;
+}
+
+/* Modal style */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10; /* Adjust as needed */
+}
+
+.modal {
+    width: 400px;
+    height: 200px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 11; /* Adjust as needed */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-close-button {
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    background: no-repeat url("@/assets/close.png"); 
+    background-size: 24px;
+  border: none;
+  /* background: none; */
+  cursor: pointer;
+  outline: none;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
 }
 </style>

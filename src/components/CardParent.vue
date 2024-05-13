@@ -38,9 +38,6 @@
       <div class="modal-header">
         <h3>Success!</h3>
         <button @click="closeOrderPlacedModal" class="modal-close-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 9.29L7.71 17 6 15.29 10.71 10 6 4.71 7.71 3 12 7.29z" />
-          </svg>
         </button>
       </div>
       <div class="modal-body">
@@ -66,8 +63,8 @@ import { useCartStore } from '@/stores/cartStore'
 const router = useRouter();
 const productStore = useProductStore();
 const cartStore = useCartStore();
-productStore.setProducts(ref(products).value);
 // const filteredProducts = ref(productStore.filteredProducts).value;
+productStore.setProducts(ref(products).value);
 
 
 const showOrderPlacedModal = ref(false);
@@ -200,8 +197,13 @@ p {
 }
 
 .modal-close-button {
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    background: no-repeat url("@/assets/close.png"); 
+    background-size: 24px;
   border: none;
-  background: none;
+  /* background: none; */
   cursor: pointer;
   outline: none;
 }
