@@ -132,7 +132,7 @@ const addToCart = (product) => {
 }
 
 .description {
-    height: 1.5rem;
+    height: 1.3rem;
     text-overflow: clip;
     white-space: nowrap;
     overflow: hidden;
@@ -140,6 +140,7 @@ const addToCart = (product) => {
 }
 
 .price {
+    color: rgb(240, 114, 5);
     text-align: left;
     font-weight: 700;
     font-size: 1.5rem;

@@ -1,35 +1,63 @@
 <!-- Register.vue -->
 <template>
   <div class="signup-container">
-    <h2>Create Your Music Store Account</h2>
-    <form @submit.prevent="register" class="signup-form">
+    <h2>Create your Music Store account</h2>
+    <form  @submit.prevent="register" class="signup-form">
+      <div class="form-group">
+        <label for="email">Full name:</label>
+        <input class="input" type="email" id="email" ref="email" required>
+      </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input class="input" type="email" id="email" >
+        <input class="input" type="email" id="email" ref="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone number:</label>
+        <input class="input" type="phone" id="phone" ref="phone" required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input class="input" type="password" id="password" >
+        <input class="input" type="password" id="password" ref="password">
       </div>
       <div class="form-group">
         <label for="confirmPassword">Confirm Password:</label>
-        <input class="input" type="password" id="confirmPassword" >
+        <input class="input" type="password" id="confirmPassword">
       </div>
-      <button @click="router.push({ name: 'home'})" type="submit" class="signup-button">Register</button>
+      <button @click="handleRegister" type="submit" class="signup-button">Register</button>
     </form>
   </div>
 </template>
 
 <script setup>
+import { ref} from 'vue';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/userStore';
 
 const router = useRouter();
+const userStore = useUserStore();
+const user = ref( userStore.userInfo)
 
-const registerData = {
-        email: 'random@gmail.com',
-        password: '1234',
-        confirmPassword: '1234'
-};
+// function register() {
+
+//   userStore.userInfo.email = ref.value.email; // Access the value using the ref
+//   user.email = document.getElementById('email').value;
+
+// //   userStore.setEmail(ref.value.email);
+
+//   // You can now use these values for further processing
+//   console.log('Email:', email);
+//   console.log('Password:', password);
+//   console.log('Confirm Password:', confirmPassword);
+
+//   // Replace with your actual registration logic (e.g., API call)
+//   // ...
+// }
+function handleRegister() {
+    // userStore.initializeName();
+//   userStore.userInfo.email = ref.value.email; // Access the value using the ref
+//   user.email = document.getElementById('email').value;
+    router.push({ name: 'home'});
+}
 
 
 //   data() {
@@ -84,6 +112,7 @@ label {
 .input {
 /* display: block; */
   width: 378px;
+  margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;

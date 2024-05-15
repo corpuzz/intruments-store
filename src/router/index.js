@@ -12,13 +12,13 @@ import CheckoutPayment from '@/views/CheckoutPayment.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'sign-up',
+    //   component: ProfileView
+    // },
     {
       path: '/',
-      name: 'sign-up',
-      component: ProfileView
-    },
-    {
-      path: '/home',
       name: 'home',
       component: HomeView
     },

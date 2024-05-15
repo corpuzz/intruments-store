@@ -2,45 +2,49 @@
     <div>
         <NavBar />
         <div class="cart-container">
-            <h2>Your Shopping Cart</h2>
-            <div v-if="cartStore.isEmpty">
-                <p class="page-message">Your cart is empty.</p>
+            <h2 class="cart-title">Your Shopping Cart</h2>
+            <div class="wrapper">
+                <div v-if="cartStore.isEmpty">
+                    <p class="page-message">Your cart is empty.</p>
+                </div>
+
+                <div class="v-else" v-else>
+                    <div v-for="item in cartItems" :key="item.id" class="cart-item">
+                        <div class="cart-item-details">
+                            <img :src="item.image" alt="Product Image" class="cart-item-image">
+                            <div class="cart-item-info">
+                                <h3>{{ item.name }}</h3>
+                                <p class="pdescription">{{ item.description }}</p>
+                                <p class="item-price">Price: {{ productStore.convertToPhp(item.price) }}</p>
+                                <div class="quantity-controls">
+                                    <button @click="decrementQuantity(item)" class="quantity-button">-</button>
+                                    <span class="item-quantity">{{ item.quantity }}</span>
+                                    <button @click="incrementQuantity(item)" class="quantity-button">+</button>
+                                </div>
+                            </div>
+                            <div class="cii-right">
+                                <input type="checkbox" id="selected-product" name="selected-product"
+                                    v-model="item.isChecked" @change="addToCheckout(item)">
+                                <div>
+                                    <button @click="removeFromCart(item.id)" class="remove-button">Remove</button>
+                                    <p class="item-total">Total: {{ productStore.convertToPhp(item.price *
+                                        item.quantity) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-summary">
+                        <p class="total-items">Total Items: {{ totalItems }}</p>
+                        <p class="total-price">Total Amount: {{ productStore.convertToPhp(totalPrice) }}</p>
+                        <div>
+                            <button @click="handleCart" class="cart-button checkout">Checkout</button>
+                            <button @click="clearCart" class="cart-button clear">Clear All</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div v-else>
-                <div v-for="item in cartItems" :key="item.id" class="cart-item">
-                    <div class="cart-item-details">
-                        <img :src="item.image" alt="Product Image" class="cart-item-image">
-                        <div class="cart-item-info">
-                            <h3>{{ item.name }}</h3>
-                            <p class="pdescription">{{ item.description }}</p>
-                            <p class="item-price">Price: {{ productStore.convertToPhp(item.price) }}</p>
-                            <div class="quantity-controls">
-                                <button @click="decrementQuantity(item)" class="quantity-button">-</button>
-                                <span class="item-quantity">{{ item.quantity }}</span>
-                                <button @click="incrementQuantity(item)" class="quantity-button">+</button>
-                            </div>
-                        </div>
-                        <div class="cii-right">
-                            <input type="checkbox" id="selected-product" name="selected-product"
-                                v-model="item.isChecked" @change="addToCheckout(item)">
-                            <div>
-                                <button @click="removeFromCart(item.id)" class="remove-button">Remove</button>
-                                <p class="item-total">Total: {{ productStore.convertToPhp(item.price * item.quantity) }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cart-summary">
-                    <p class="total-items">Total Items: {{ totalItems }}</p>
-                    <p class="total-price">Total Amount: {{ productStore.convertToPhp(totalPrice) }}</p>
-                    <div>
-                        <button @click="handleCart" class="cart-button checkout">Checkout</button>
-                        <button @click="clearCart" class="cart-button clear">Clear All</button>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -137,13 +141,39 @@ const clearCart = () => {
 
 
 <style scoped>
+.wrapper {
+    /* width: 100%; */
+    margin: 20px;
+}
+
 .cart-container {
     max-width: 700px;
+    height: calc(100vh - 100px);
     margin: 0 auto;
-    padding: 20px;
+    /* padding: 20px; */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 0px;
+}
+
+.cart-container::-webkit-scrollbar {
+    width: 10px; /* Adjust scrollbar width */
+}
+
+.cart-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+}
+
+.cart-container::-webkit-scrollbar-thumb {
+    background-color: #888; /* Thumb color */
+    border-radius: 5px; /* Roundness of the thumb */
+}
+
+.cart-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Thumb color on hover */
 }
 
 .page-message {
@@ -198,6 +228,8 @@ h2 {
     color: #333;
 }
 
+
+
 .item-price,
 .item-total {
     font-weight: 500;
@@ -214,6 +246,7 @@ h2 {
 .pdescription {
     margin: 5px auto;
 }
+
 .quantity-button {
     padding: 5px 10px;
     font-size: 1rem;
@@ -253,11 +286,36 @@ h2 {
     background-color: #c82333;
 }
 
+.cart-title {
+    width: 100%;
+    height: 50px;
+    padding-top: 1rem;
+    background-color: #fff;
+    border-radius: 0px 0px 5px 5px;
+    vertical-align: middle;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+}
+
+/* .v-else {
+    width: 100%;
+} */
 .cart-summary {
+    width: 628px;
+    background-color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 2rem;
+    border-radius: 5px; 
+    padding: 0 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .total-items,
@@ -333,12 +391,12 @@ h2 {
     width: 24px;
     height: 24px;
     padding: 0px;
-    background: no-repeat url("@/assets/close.png"); 
+    background: no-repeat url("@/assets/close.png");
     background-size: 24px;
-  border: none;
-  /* background: none; */
-  cursor: pointer;
-  outline: none;
+    border: none;
+    /* background: none; */
+    cursor: pointer;
+    outline: none;
 }
 
 .modal-body {

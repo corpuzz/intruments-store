@@ -1,41 +1,33 @@
 
 import { defineStore } from 'pinia';
 
-export const useProductStore = defineStore('productStore', {
+export const useUserStore = defineStore('userStore', {
     state: () => ({
-        products: [],
-        selectedProduct: null,
-        filteredProducts: [],
-        selectedProductImage: '',
-        searchTerm: '',
+        userInfo : {
+            name: '',
+            imageUrl: 'src/views/image.png',
+            address: '',
+            email: '',
+            phone: '',
+            password: '',
+            // orders: [],
+        }
     }),
     actions: {
-        setSelectedProduct(product) {
-            this.selectedProduct = product;
-            // this.selectedProductImage = product.image;
+        setName(name) {
+            this.userInfo.name = name;
         },
-        formatToPeso(price) {
-            let formatter = new Intl.NumberFormat('en-PH', {
-                style: 'currency',
-                currency: 'PHP',
-            });
-            return formatter.format(price);
+        setAddress(address) {
+            this.userInfo.address = address;
         },
-        setProducts(products) {
-            this.products = products;
-            this.filteredProducts = products; // Initially set filtered to all products
+        setEmail(email) {
+            this.userInfo.email = email;
         },
-        filterProducts() {
-            this.filteredProducts = this.products.filter((product) => product.category.includes(this.searchTerm.toLocaleLowerCase()) || product.name.toLowerCase().includes(this.searchTerm));
-            this.$state.products = [...this.products];
+        setPhone(phone) {
+            this.userInfo.phone = phone;
         },
-        convertToPhp(price) {
-        const formatter = new Intl.NumberFormat('fil-PH', {
-            style: 'currency',
-            currency: 'PHP',
-        });
-            return formatter.format(price);
-        },
-
+        initializeName() {
+            this.userInfo.name = this.email.split("@")[0];
+        }
     },
 });

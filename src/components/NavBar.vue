@@ -1,32 +1,41 @@
 <template>
+    <div class="nav-bar-container">
     <nav class="nav-bar">
         <ul>
-            <li><router-link to="/home">Home</router-link></li>
+            <li><router-link to="/">Home</router-link></li>
             <div>
                 <div class="search-div">
-                    <li class="search-li"><input type="search" id="search-box" v-model="productStore.searchTerm" @input="detectInput" placeholder="Search Products"></li>
-                    <li class="search-btn-li"><button @click="productStore.filterProducts" id="search-btn">Search</button></li>
+                    <li class="search-li"><input type="search" id="search-box" v-model="productStore.searchTerm"
+                            @input="detectInput" placeholder="Search Products"></li>
+                    <li class="search-btn-li"><button @click="productStore.filterProducts"
+                            id="search-btn">Search</button></li>
                 </div>
-                <li><router-link to="/home">Shop</router-link></li>
+                <li><router-link to="/">Shop</router-link></li>
                 <!-- <div class="cart-counter-div"> -->
 
-                    <li><router-link to="/cart">Cart</router-link></li>
-                    <!-- <div id="cart-counter"></div> -->
+                <li><router-link to="/cart">Cart</router-link></li>
+                <!-- <div id="cart-counter"></div> -->
                 <!-- </div> -->
-                <li><router-link to="/profile">Profile</router-link></li>
-                <li><router-link to="/login">Login/Logout</router-link></li>
+
+                <li v-if="!isProfile"><router-link to="/login">Login/Signup</router-link></li>
+                <li v-else><router-link to="/profile">Profile</router-link></li>
+                <!-- <li><router-link to="/login">Login/Logout</router-link></li> -->
             </div>
         </ul>
     </nav>
+
+    </div>
 
     <!-- <RouterView /> -->
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useProductStore } from '@/stores/productStore';
 
+const isProfile = ref(true);
 const router = useRouter();
 const productStore = useProductStore();
 
@@ -41,12 +50,26 @@ const detectInput = () => {
 </script>
 
 <style scoped>
+.nav-bar-container {
+  position: sticky;
+  top: 0;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    /* padding: 1rem; */
+    height: 80px;
+    background-color: transparent;
+     /* margin-bottom: 1rem; */
+}
+
 .nav-bar {
+    width: 80%;
+    /* margin: 1rem; */
     /* background-color: #333; */
     background-color: #007bff;
     padding: 10px 20px;
     border-radius: 5px;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     /* box-shadow: 0px 0px 5px 0px #005fc5; */
 }
 
@@ -93,11 +116,21 @@ a:hover {
 
 
 .search-li {
+
     margin-right: 0;
 }
 
+.search-btn-li {
+    /* height: 24px;
+    width: 24px; */
+}
 
 #search-btn {
+    /* height: 24px;
+    width: 24px; */
+    /* background-color: #fff; */
+    /* background: no-repeat url("/src/assets/search.svg"); */
+    background-size: 24px;
     border-radius: 5px;
     padding: 5px;
     outline: none;
@@ -125,4 +158,4 @@ a:hover {
     border-radius: 1000px;
 }
 
-</style>
+</style> */

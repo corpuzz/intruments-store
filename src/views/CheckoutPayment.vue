@@ -157,6 +157,7 @@ const decrementQuantity = (item) => {
 <style scoped>
 .cart-container {
     max-width: 700px;
+    /* height: calc(100vh - 100px); */
     margin: 0 auto;
     padding: 1rem 5rem;
     background-color: #fff;
@@ -290,9 +291,25 @@ h2 {
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    box-shadow: 0px 0px 8px 0px #65656586;
+    border-radius: 5px; 
+    box-shadow: 0px 2px 8px #65656586;
     padding: 0px 1rem;
 }
+
+/* .cart-summary {
+    width: 668px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 2rem;
+    border-radius: 5px; 
+    padding: 0 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+} */
 
 .total-items,
 .total-price {

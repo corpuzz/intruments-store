@@ -9,25 +9,26 @@
         <div class="profile-sections">
             <div class="profile-section">
                 <h3>Account information</h3>
-                <hr style="width: 100%"/>
-                <ul>
-                    <li>
-                        <p>Shipping Address: <br>{{ user.address }}</p>
-                        <!-- <span v-if="address">Default</span> -->
-                        <!-- <router-link :to="`/profile/address/${address}/edit`">Edit</router-link> -->
-                    </li>
-                    <li>
-                        <p v-if="user.phone">Phone:<br> {{ user.phone }}</p>
-                    </li>
-                    <li>
-                        <p v-if="user.email">Email:<br> {{ user.phone }}</p>
-                    </li>
-                </ul>
-                <!-- <router-link to="/profile/address/new">Add New Address</router-link> -->
+                <hr style="width: 100%" />
+                <div>
+                    <label class="block" for="shipping-address">Shipping Address: </label>
+                    <div v-if="!isEditing">
+                        <div class="flex">
+                            <p>{{ user.address }}</p>
+                            <button @click="setIsEditing(true)" class="edit-button">Edit</button>
+                        </div>
+                    </div>
+                    <span v-else>
+                        <div class="flex">
+                            <input class="input" type="text" id="shipping-address" v-model="user.address" @blur="setIsEditing(false)">
+                            <button @click="setIsEditing(false)" class="save-button">Save</button>
+                        </div>
+                    </span>
+                </div>
             </div>
             <div class="profile-section">
-                <h3>Order History</h3>
-                <hr style="width: 100%; margin-bottom: 1rem;"/>
+                <h3>My Orders</h3>
+                <hr style="width: 100%; margin-bottom: 1rem;" />
                 <!-- <ul>
           <li v-for="order in user.orders" :key="order.id">
             <p>Order #{{ order.id }} - {{ order.name }}</p>
@@ -55,36 +56,37 @@
 <script setup>
 
 import { useRouter } from 'vue-router';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { useCartStore } from '@/stores/cartStore';
 import { useProductStore } from '@/stores/productStore';
+import { useUserStore } from '@/stores/userStore'
 
 const router = useRouter();
 const cartStore = useCartStore();
-const cartItems = computed( () => cartStore.orders)
+const cartItems = computed(() => cartStore.orders)
 const productStore = useProductStore();
-const user = {
-    name: "Jose P. Rizal",
-    email: "random@gmail.com",
-    address: 'La Trinidad, Benguet',
-    phone: '09020210102',
-    paymentMethods: [
-        'COD', 'GCash', 'Maya'
-    ],
-    orders: [],
-    imageUrl: "src/views/image.png"
+const useStore = useUserStore();
+
+const user = ref(useStore.userInfo);
+
+const isEditing = ref(false);
+
+function setIsEditing(value) {
+  isEditing.value = value;
 }
 const viewDescription = (product) => {
     productStore.setSelectedProduct(product)
     // showDescription = true;
     // router.push(`/productDescription/`);
-    router.push({name: 'productDescription'});
+    router.push({ name: 'productDescription' });
 }
 </script>
 
 <style scoped>
 .profile-container {
+    margin: 1rem 2rem auto 2rem;
     /* width: 70vw; */
+    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -98,7 +100,7 @@ const viewDescription = (product) => {
     gap: 20px;
     padding: 1rem;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgba(99, 99, 99, 0.57);
+    box-shadow: 0px 0px 6px 0px rgba(99, 99, 99, 0.57);
 }
 
 .profile-picture {
@@ -125,7 +127,7 @@ const viewDescription = (product) => {
     padding: 20px;
     /* border: 1px solid #ddd; */
     border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgba(99, 99, 99, 0.57);
+    box-shadow: 0px 0px 6px 0px rgba(99, 99, 99, 0.57);
 }
 
 .profile-section h3 {
@@ -201,6 +203,7 @@ const viewDescription = (product) => {
     object-fit: scale-down;
     overflow: hidden;
 }
+
 .cart-item-info {
     margin-left: 1rem;
     width: 100%;
@@ -237,6 +240,7 @@ const viewDescription = (product) => {
     /* transition: font-weight 0.3 ease-in-out; */
     place-self: center end;
 }
+
 .btn:hover {
     color: white;
     background: #005fc5;
@@ -246,6 +250,7 @@ const viewDescription = (product) => {
 .pname {
     font-weight: bold;
 }
+
 .pp {
     text-align: left;
     margin: 0 auto;
@@ -258,4 +263,42 @@ const viewDescription = (product) => {
     /* padding: 0 1rem; */
 }
 
+/* Edit styling */
+#product-name {
+    /* width: 100%; */
+}
+.block {
+    display: block;
+}
+.edit-button, .save-button {
+    /* display: block; */
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.save-button {
+  background-color: #007bff; /* Green for save action */
+  color: white;
+}
+
+.flex {
+    /* width: 100%; */
+    display: flex;
+    justify-items: space-between;
+    margin: 5px auto;
+}
+
+.flex p {
+    margin: 0 auto;
+    width: 100%;
+    padding: 8px 0px;
+}
+
+.input {
+    padding: 8px;
+    width: 100%;
+}
 </style>
